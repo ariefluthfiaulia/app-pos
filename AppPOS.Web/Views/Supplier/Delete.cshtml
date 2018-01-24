@@ -1,0 +1,70 @@
+﻿@model AppPOS.ViewModel.SupplierViewModel
+
+<h3>Apakah anda ingin menghapus record ini?</h3>
+<div>
+    @*<h4>SupplierViewModel</h4>
+    <hr />*@
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alamat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoTelp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoTelp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActivated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActivated)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <button type="button" id="btn-delete-confirm" class="btn btn-danger" data-id="@Model.Id">Delete</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $("#btn-delete-confirm").click(function () {
+        $.ajax({
+            url: '@Url.Action("DeleteConfirm", "Supplier")',
+            type: 'post',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                if (result.success) {
+                    $("#modal-form").modal("hide");
+                    ShowList();
+                }
+                else
+                {
+                    alert('Error : ' + result.message);
+                }
+            }
+        });
+    });
+</script>

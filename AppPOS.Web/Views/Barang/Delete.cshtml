@@ -1,0 +1,96 @@
+﻿@model AppPOS.ViewModel.BarangViewModel
+
+<h3>Apakah anda ingin menghapus record ini?</h3>
+<div>
+    @*<h4>BarangViewModel</h4>
+        <hr />*@
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSupplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSupplier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NamaSupplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamaSupplier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deskripsi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deskripsi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Harga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Harga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stok)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stok)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActivated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActivated)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <button type="button" id="btn-delete-confirm" class="btn btn-danger" data-id="@Model.Id">Delete</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+    </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $("#btn-delete-confirm").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("DeleteConfirm", "Barang")',
+            type: 'post',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                if (result.success) {
+                    $("#modal-form").modal("hide");
+                    ShowList();
+                }
+                else
+                {
+                    alert('Error : ' + result.message);
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,43 @@
+﻿@model AppPOS.ViewModel.SupplierViewModel
+
+<div>
+    @*<h4>SupplierViewModel</h4>
+    <hr />*@
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nama)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nama)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alamat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoTelp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoTelp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActivated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActivated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+</p>

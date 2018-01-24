@@ -1,0 +1,67 @@
+﻿@model AppPOS.ViewModel.BarangViewModel
+
+<div>
+    @*<h4>BarangViewModel</h4>
+    <hr />*@
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdSupplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdSupplier)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.NamaSupplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NamaSupplier)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deskripsi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deskripsi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Harga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Harga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stok)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stok)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActivated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActivated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+</p>

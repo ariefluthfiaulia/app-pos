@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AppPOS.ViewModel.TokoViewModel>
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nama)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alamat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoTelp)
+            </th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+  
+    <tbody>
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nama)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alamat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoTelp)
+            </td>
+            <td>
+                <button type="button" class="btn btn-warning btn-edit" data-id="@item.Id" title="Edit">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-danger btn-delete" data-id="@item.Id" title="Delete">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+
+    //$("#data-list").DataTable({
+    //    //"columnDefs": colDefs,
+    //    "paging": true,
+    //    "lengthChange": true,
+    //    "searching": true,
+    //    "ordering": true,
+    //    "info": true,
+    //    "autoWidth": false
+    //});
+
+
+    $(".btn-edit").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Edit", "Toko")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Edit");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+    $(".btn-delete").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Delete", "Toko")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Delete");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+</script>

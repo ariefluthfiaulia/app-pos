@@ -1,0 +1,124 @@
+﻿@model IEnumerable<AppPOS.ViewModel.KaryawanViewModel>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NoInduk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamaLengkap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alamat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TempatTanggalLahir)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JenisKelaminDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActivated)
+            </th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoInduk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamaLengkap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alamat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TempatTanggalLahir)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JenisKelaminDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActivated)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-edit" data-id="@item.Id" title="Edit">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-info btn-detail" data-id="@item.Id" title="Detail">
+                        <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-delete" data-id="@item.Id" title="Delete">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*@Scripts.Render("~/ AdminLTE / plugins / datatables / js")
+    @Scripts.Render("~/ Scripts / Tables / Data / List")*@
+
+<script type="text/javascript">
+
+    //$("#data-list").DataTable({
+    //    //"columnDefs": colDefs,
+    //    "paging": true,
+    //    "lengthChange": true,
+    //    "searching": true,
+    //    "ordering": true,
+    //    "info": true,
+    //    "autoWidth": false
+    //});
+
+
+    $(".btn-edit").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Edit", "Karyawan")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Edit");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+
+    $(".btn-detail").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Details", "Karyawan")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Details");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+
+
+
+    $(".btn-delete").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Delete", "Karyawan")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Delete");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+</script>
