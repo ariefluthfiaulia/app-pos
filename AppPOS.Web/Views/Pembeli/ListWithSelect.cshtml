@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AppPOS.ViewModel.PembeliViewModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoMember)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NamaLengkap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alamat)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <div class="btn-group btn-group-sm">
+                <button type="button" class="btn btn-primary btn-Select" data-id="@item.Id" data-nomember="@item.NoMember" onclick="LoadFormEmployee('@item.NoMember')" title="Select" data-dismiss="modal">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                </button>
+            </div>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoMember)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NamaLengkap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alamat)
+        </td>
+    </tr>
+}
+</table>

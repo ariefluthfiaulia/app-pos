@@ -48,9 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BarangRepo.cs" />
+    <Compile Include="DetailBarangRepo.cs" />
     <Compile Include="KaryawanRepo.cs" />
+    <Compile Include="PembelianRepo.cs" />
     <Compile Include="PembeliRepo.cs" />
+    <Compile Include="PenjualanRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceivedOrderRepo.cs" />
+    <Compile Include="ReturPenjualanRepo.cs" />
     <Compile Include="SupplierRepo.cs" />
     <Compile Include="TokoRepo.cs" />
   </ItemGroup>

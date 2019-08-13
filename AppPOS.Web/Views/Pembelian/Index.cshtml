@@ -1,0 +1,241 @@
+﻿@model AppPOS.ViewModel.DetailBarangViewModel
+
+@{
+    ViewBag.Title = "Pembelian";
+}
+
+<div class="box">
+    <div class="box-body">
+        @*<div class="row">
+            <div class="col-md-3">
+                <input type="text" id="txt-searching" class="form-control" placeholder="Masukkan No. Member" />
+            </div>
+            <div class="col-md-6">
+                <button id="btn-search" class="btn btn-primary">Search</button>
+                    <button id="btn-employee-search" class="btn btn-primary">List Member</button>
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="reference-no" class="form-control" />
+            </div>
+        </div>*@
+        <hr />
+        @*<div class="row">
+                <div id="employee-info" class="col-lg-12"></div>
+            </div>
+            <hr />*@
+        <div class="row">
+            <div class="col-md-1">
+                <h4><b>Supplier:</b></h4>
+                @*<button id="btn-payment" class="btn btn-success">Bayar</button>*@
+            </div>
+            <div class="col-md-3">
+                @*<input id="txt-barcode" type="text" class="form-control" placeholder="Barcode" />*@
+                @Html.DropDownListFor(model => model.IdSupplier, (IEnumerable<SelectListItem>)ViewBag.SupplierList, "Pilih Supplier", new { @class = "form-control", @id = "idSupl" })
+                @Html.ValidationMessageFor(model => model.IdSupplier, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-3">
+                <button id="btn-search-item-list" class="btn btn-danger" onclick="disable()">Tambah Barang</button>
+            </div>
+            <div class="col-md-2">
+                @*<button id="btn-payment" class="btn btn-success">Bayar</button>*@
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="reference-no" class="form-control" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tbl-item-list" class="table table-bordered">
+                    <thead id="tbl-head"></thead>
+                    @Html.Partial("HeaderPembelian")
+                    <tbody id="tbl-details"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">Grand Total</td>
+                            <td>
+                                <input id="grand-total" type="text" class="form-control" value="0" disabled="disabled" readonly="readonly" />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td><button id="btn-payment" class="btn btn-success">Bayar</button></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    @*$(document).ready(function () {
+        LoadFormEmployee("");
+    });
+
+    function LoadFormEmployee(noMem) {
+        $.ajax({
+            url: '@Url.Action("GetByNoMember", "Pembeli")',
+            data: { noMember: noMem },
+            type: 'get',
+            success: function (result) {
+                $("#employee-info").html(result);
+            }
+        });
+    }
+
+    $("#btn-search").click(function () {
+        LoadFormEmployee($('#txt-searching').val());
+
+    });
+
+    $("#btn-employee-search").click(function () {
+        $.ajax({
+            url: '@Url.Action("ListWithSelect", "Pembeli")',
+            type: 'get',
+            success: function (result) {
+                $(".modal-title").html("List Member");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });*@
+
+        function disable() {
+            document.getElementById("idSupl").disabled = true;
+        }
+
+        $("#btn-search-item-list").click(function () {
+            //alert($("#tahu").val());
+            $.ajax({
+                url: '@Url.Action("ListWithSelectSupplier", "DetailBarang")',
+                type: 'get',
+                data: { IdSupplier: $("#idSupl").val() },
+                success: function (result) {
+                    $(".modal-title").html("List of Items");
+                    $(".modal-body").html(result);
+                    $("#modal-form").modal("show");
+                }
+            });
+        });
+
+        function TambahBarangKeTabelDetail(idBarang)
+        {
+            $.ajax({
+                url: '@Url.Action("GetItemById", "Pembelian")',
+                type: 'get',
+                data: { id: idBarang},
+                success: function (result) {
+                    $("#tbl-details").append(result);
+                }
+            });
+        }
+
+        function GetValue(obj) {
+            var tr = $(obj).closest('tr');
+            var jml = $(tr).find("input[name=JumlahBarang]").val();
+            var har = $(tr).find("input[name=HargaPembelian]").val();
+            $(tr).find("input[name=Total]").val(jml * har);
+            GetGrandTotal();
+        }
+
+        function GetGrandTotal()
+        {
+            var grdTotal = 0;
+            $('#tbl-details').find('tr').each(function () {
+                var total = $(this).find('input[name=Total]').val();
+                grdTotal = parseFloat(grdTotal) + parseFloat(total);
+            });
+            $("#grand-total").val(grdTotal);
+        }
+
+        $("#btn-payment").click(function () {
+
+            var dataDetails = [];
+            $('#tbl-details').find('tr').each(function () {
+                var idDetailBarang = $(this).find('input[name=IdDetailBarang]').val();
+                //var idHP = $(this).find('input[name=IdHeaderPenjualan]').val();
+                var harga = $(this).find('input[name=HargaPembelian]').val();
+                var jumlahBarang = $(this).find('input[name=JumlahBarang]').val();
+                var total = $(this).find('input[name=Total]').val();
+                var detail = { IdDetailBarang: idDetailBarang, HargaPembelian: harga, JumlahBarang: jumlahBarang, Total: total };
+                dataDetails.push(detail);
+            });
+
+            var dataSelling = { IdHeaderPembelian: $("#IdHeaderPembelian").val(), Details: dataDetails };
+
+            //alert(JSON.stringify(dataSelling));
+            //alert($("#IdHeaderPenjualan").val());
+            $.ajax({
+                url: '@Url.Action("Save", "Pembelian")',
+                type: 'post',
+                data: { model: dataSelling },
+                success: function (result) {
+                    var data = result.data;
+                    //alert(JSON.stringify(data));
+                    if (data.Success)
+                    {
+                        $.bootstrapGrowl("Save successful.", { type: "success" });
+                        //alert("sukses simpan");
+                        $("#reference-no").val(data.Referensi);
+                    }
+                    else
+                    {
+                        $.bootstrapGrowl("Error. " + data.Message, { type: "danger" });
+                        //alert("gagal simpan");
+                    }
+                    //$("#tbl-details").append(result);
+                }
+            });
+        });
+
+        function HapusBarang(obj) {
+        var tr = $(obj).closest('tr');
+        var des = $(obj).closest('tr').find('input[name=Deskripsi]').val();
+        var rem = confirm('Apakah anda ingin menghapus ' + des);
+        if (rem) {
+            var idBr = $(tr).find("input[name=IdBarang]").val();
+            var item = { IdHeaderPembelian: $("#IdHeaderPembelian").val(), IdBarang: idBr };
+
+            //alert($("#IdHeaderPenjualan").val());
+            //alert(JSON.stringify(item));
+            $.ajax({
+                url: '@Url.Action("HapusBarang", "Pembelian")',
+                type: 'post',
+                data: { model: item },
+                success: function (result) {
+                    if (result.success) {
+                        $(obj).closest('tr').remove();
+                    }
+                    else {
+                        alert('Error : ' + result.message);
+                    }
+                }
+            });
+
+        }
+    }
+
+    </script>
+}
+

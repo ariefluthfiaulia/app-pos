@@ -26,6 +26,10 @@ namespace AppPOS.DataModel
         [Column(TypeName = "bit")]
         public bool IsActivated { get; set; }
 
-        public virtual ICollection<Barang> Barangs { get; set; }
+        //public virtual ICollection<DetailPembelian> DetailPembelians { get; set; }
+
+        //public virtual ICollection<DetailPenjualan> DetailPenjualans { get; set; }
+
+        public virtual ICollection<DetailBarang> DetailBarangs { get; set; }
     }
 }

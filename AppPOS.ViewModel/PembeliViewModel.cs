@@ -11,7 +11,7 @@ namespace AppPOS.ViewModel
     {
         public int Id { get; set; }
 
-        [Display(Name = "No Member")]
+        [Display(Name = "No. Member")]
         public string NoMember { get; set; }
 
         public string NamaDepan { get; set; }
@@ -20,7 +20,7 @@ namespace AppPOS.ViewModel
 
         public string NamaBelakang { get; set; }
 
-        [Display(Name = "Nama Lengkap")]
+        [Display(Name = "Nama")]
         public string NamaLengkap
         {
             get
@@ -30,6 +30,7 @@ namespace AppPOS.ViewModel
                     (string.IsNullOrEmpty(NamaBelakang) ? "" : NamaBelakang);
             }
         }
+
         [MaxLength(500)]
         public string Alamat { get; set; }
 

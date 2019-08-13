@@ -20,6 +20,11 @@ namespace AppPOS.Web.Controllers
             return PartialView(PembeliRepo.GetAll());
         }
 
+        public ActionResult ListWithSelect()
+        {
+            return PartialView(PembeliRepo.GetAll());
+        }
+
         public ActionResult Create()
         {
             return PartialView();
@@ -96,6 +101,16 @@ namespace AppPOS.Web.Controllers
             {
                 return Json(new { success = false, message = PembeliRepo.Message }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public ActionResult GetByNoMember(string noMember)
+        {
+            return PartialView(PembeliRepo.GetByNoMember(noMember));
+        }
+
+        public ActionResult GetByNoReferensi(string noReferensi)
+        {
+            return PartialView(PembeliRepo.GetByNoReferensi(noReferensi));
         }
     }
 }

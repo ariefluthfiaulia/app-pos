@@ -17,7 +17,7 @@ namespace AppPOS.Repository
             List<TokoViewModel> result = new List<TokoViewModel>();
             using (var db = new PosContext())
             {
-                result = (from tk in db.Mst_Toko
+                result = (from tk in db.Mst_Tokos
                           select new TokoViewModel
                           {
                               Id = tk.Id,
@@ -46,12 +46,12 @@ namespace AppPOS.Repository
                         toko.NoTelp = model.NoTelp;
                         toko.CreatedBy = "Rio";
                         toko.CreatedDate = DateTime.Now;
-                        db.Mst_Toko.Add(toko);
+                        db.Mst_Tokos.Add(toko);
                         db.SaveChanges();
                     }
                     else
                     {
-                        Toko toko = db.Mst_Toko.Where(o => o.Id == model.Id).FirstOrDefault();
+                        Toko toko = db.Mst_Tokos.Where(o => o.Id == model.Id).FirstOrDefault();
                         if (toko != null)
                         {
                             toko.Nama = model.Nama;
@@ -79,7 +79,7 @@ namespace AppPOS.Repository
 
             using (var db = new PosContext())
             {
-                result = (from tk in db.Mst_Toko
+                result = (from tk in db.Mst_Tokos
                           where tk.Id == id
                           select new TokoViewModel
                           {
@@ -99,8 +99,8 @@ namespace AppPOS.Repository
             {
                 using (var db = new PosContext())
                 {
-                    Toko toko = db.Mst_Toko.Where(d => d.Id == id).FirstOrDefault();
-                    db.Mst_Toko.Remove(toko);
+                    Toko toko = db.Mst_Tokos.Where(d => d.Id == id).FirstOrDefault();
+                    db.Mst_Tokos.Remove(toko);
                     db.SaveChanges();
                 }
             }

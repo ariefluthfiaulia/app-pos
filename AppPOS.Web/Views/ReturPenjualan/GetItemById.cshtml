@@ -1,0 +1,35 @@
+﻿@model AppPOS.ViewModel.DetailReturPenjualanViewModel
+
+<tr>
+    <td>
+        @Html.HiddenFor(model => model.IdBarang)
+        @Html.HiddenFor(model => model.IdHeaderPenjualan)
+        @Html.EditorFor(model => model.CodeBarang, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.CodeBarang, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Deskripsi, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.Deskripsi, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.HargaPenjualan, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.HargaPenjualan, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.JumlahBarang, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.JumlahBarang, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        @Html.EditorFor(model => model.JumlahPengembalian, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => model.JumlahPengembalian, "", new { @class = "text-danger" })
+    </td>
+    <td>
+        <button type="button" class="btn btn-info btn-detail" title="Retur Barang" onclick="ReturBarang(this)">
+            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+        </button>
+    </td>
+</tr>

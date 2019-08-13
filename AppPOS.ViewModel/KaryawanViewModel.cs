@@ -31,6 +31,7 @@ namespace AppPOS.ViewModel
                     (string.IsNullOrEmpty(NamaBelakang) ? "" : NamaBelakang);
             }
         }
+
         [MaxLength(500)]
         public string Alamat { get; set; }
 

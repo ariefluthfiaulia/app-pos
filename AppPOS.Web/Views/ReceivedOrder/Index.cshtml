@@ -1,0 +1,295 @@
+﻿@model AppPOS.ViewModel.DetailBarangViewModel
+@{
+    ViewBag.Title = "Received Order";
+}
+
+<div class="box">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" id="txt-searching" class="form-control" placeholder="Masukkan No. Referensi" />
+            </div>
+            <div class="col-md-6">
+                <button id="btn-search" class="btn btn-primary">Search</button>
+                @*<button id="btn-employee-search" class="btn btn-primary">List Member</button>*@
+            </div>
+            @*<div class="col-md-3">
+                    <input type="text" id="reference-no" class="form-control" />
+                </div>*@
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-1">
+                <h4><b>Supplier:</b></h4>
+                @*<button id="btn-payment" class="btn btn-success">Bayar</button>*@
+            </div>
+            <div class="col-md-3">
+                @*<input id="txt-barcode" type="text" class="form-control" placeholder="Barcode" />*@
+                @*@Html.EditorFor(model => model.IdSupplier, new { htmlAttributes = new { @class = "form-control tahu", disabled = "disabled", @readonly = "readonly" } })*@
+                @*@Html.EditorFor(model => model.NamaSupplier, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                @Html.ValidationMessageFor(model => model.IdSupplier, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="col-md-3">
+                @*<button id="btn-search-item-list" class="btn btn-danger" onclick="disable()">Tambah Barang</button>*@
+            </div>
+            <div class="col-md-2">
+                @*<button id="btn-payment" class="btn btn-success">Bayar</button>*@
+            </div>
+            <div class="col-md-3">
+                <input type="text" id="reference-no" class="form-control" />
+            </div>
+        </div>
+        @*<hr />
+            <div class="row">
+                <div class="col-md-3">
+                    <input id="txt-barcode" type="text" class="form-control" placeholder="Barcode" />
+                </div>
+                <div class="col-md-3">
+                    <button id="btn-search-item-list" class="btn btn-danger">Tambah Barang</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="btn-payment" class="btn btn-success">Bayar</button>
+                </div>
+            </div>*@
+        <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tbl-item-list" class="table table-bordered">
+                    <thead id="tbl-head"></thead>
+                    @Html.Partial("HeaderPenjualan")
+                    <tbody id="tbl-details"></tbody>
+                    <tfoot>
+                        @*<tr>
+                                <td colspan="4">Grand Total</td>
+                                <td>
+                                    <input id="grand-total" type="text" class="form-control" value="0" disabled="disabled" readonly="readonly" />
+                                </td>
+                                <td></td>
+                            </tr>*@
+                        @*<tr>
+                                <td colspan="4"></td>
+                                <td><button id="btn-payment" class="btn btn-success">Bayar</button></td>
+                                <td></td>
+                            </tr>*@
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        LoadFormEmployee("");
+    });
+
+    function LoadFormEmployee(noRef) {
+        $.ajax({
+            url: '@Url.Action("GetByNoReferensi", "Pembeli")',
+            data: { noReferensi: noRef },
+            type: 'get',
+            success: function (result) {
+                $("#employee-info").html(result);
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("ListBarang", "ReceivedOrder")',
+            data: { noReferensi: noRef },
+            type: 'get',
+            success: function (result) {
+                $("#tbl-details").html(result);
+            }
+        });
+
+        //TambahBarangKeTabelDetail();
+    }
+
+    $("#btn-search").click(function () {
+        LoadFormEmployee($('#txt-searching').val());
+
+    });
+
+    $("#btn-employee-search").click(function () {
+        $.ajax({
+            url: '@Url.Action("ListWithSelect", "Pembeli")',
+            type: 'get',
+            success: function (result) {
+                $(".modal-title").html("List Member");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+
+
+
+    @*$("#btn-search-item-list").click(function () {
+        $.ajax({
+            url: '@Url.Action("ListWithSelect", "Barang")',
+                type: 'get',
+                success: function (result) {
+                    $(".modal-title").html("List of Items");
+                    $(".modal-body").html(result);
+                    $("#modal-form").modal("show");
+                }
+            });
+        });*@
+
+    @*function TambahBarangKeTabelDetail()
+        {
+            $.ajax({
+                url: '@Url.Action("GetItemById", "ReturPenjualan")',
+                type: 'get',
+                data: { id:1 },
+                success: function (result) {
+                    $("#tbl-details").append(result);
+                }
+            });
+        }*@
+
+        //function GetValue(obj) {
+        //    var tr = $(obj).closest('tr');
+        //    var jml = $(tr).find("input[name=JumlahBarang]").val();
+        //    var har = $(tr).find("input[name=HargaPenjualan]").val();
+        //    $(tr).find("input[name=Total]").val(jml * har);
+        //    GetGrandTotal();
+        //}
+
+        //function GetGrandTotal()
+        //{
+        //    var grdTotal = 0;
+        //    $('#tbl-details').find('tr').each(function () {
+        //        var total = $(this).find('input[name=Total]').val();
+        //        grdTotal = parseFloat(grdTotal) + parseFloat(total);
+        //    });
+        //    $("#grand-total").val(grdTotal);
+        //}
+
+        @*$("#btn-payment").click(function () {
+
+            var dataDetails = [];
+            $('#tbl-details').find('tr').each(function () {
+                var idBarang = $(this).find('input[name=IdBarang]').val();
+                //var idHP = $(this).find('input[name=IdHeaderPenjualan]').val();
+                var hargaPenjualan = $(this).find('input[name=HargaPenjualan]').val();
+                var jumlahBarang = $(this).find('input[name=JumlahBarang]').val();
+                var total = $(this).find('input[name=Total]').val();
+                var detail = { IdBarang: idBarang, HargaPenjualan: hargaPenjualan, JumlahBarang: jumlahBarang, Total: total };
+                dataDetails.push(detail);
+            });
+
+            var dataSelling = { IdHeaderPenjualan: $("#IdHeaderPenjualan").val(), IdPembeli: $("#NoMember").val(), Details: dataDetails };
+
+            //alert(JSON.stringify(dataSelling));
+            //alert($("#IdHeaderPenjualan").val());
+            $.ajax({
+                url: '@Url.Action("Save", "ReturPenjualan")',
+                type: 'post',
+                data: { model: dataSelling },
+                success: function (result) {
+                    var data = result.data;
+                    //alert(JSON.stringify(data));
+                    if (data.Success)
+                    {
+                        $.bootstrapGrowl("Save successful.", { type: "success" });
+                        //alert("sukses simpan");
+                        $("#reference-no").val(data.Referensi);
+                    }
+                    else
+                    {
+                        $.bootstrapGrowl("Error. " + data.Message, { type: "danger" });
+                        //alert("gagal simpan");
+                    }
+                    //$("#tbl-details").append(result);
+                }
+            });
+        });
+
+        function HapusBarang(obj) {
+        var tr = $(obj).closest('tr');
+        var des = $(obj).closest('tr').find('input[name=Deskripsi]').val();
+        var rem = confirm('Apakah anda ingin menghapus ' + des);
+        if (rem) {
+            var idBr = $(tr).find("input[name=IdBarang]").val();
+            var item = { IdHeaderPenjualan: $("#IdHeaderPenjualan").val(), IdBarang: idBr };
+
+            //alert($("#IdHeaderPenjualan").val());
+            alert(JSON.stringify(item));
+            $.ajax({
+                url: '@Url.Action("HapusBarang", "ReturPenjualan")',
+                type: 'post',
+                data: { model: item },
+                success: function (result) {
+                    if (result.success) {
+                        $(obj).closest('tr').remove();
+                    }
+                    else {
+                        alert('Error : ' + result.message);
+                    }
+                }
+            });
+
+        }
+        }*@
+
+    function ReturBarang(obj) {
+        var tr = $(obj).closest('tr');
+        //var des = $(obj).closest('tr').find('input[name=Deskripsi]').val();
+        //var rem = confirm('Apakah anda ingin menghapus ' + des);
+        //if (rem) {
+            var idBr = $(tr).find("input[name=IdBarang]").val();
+            //var item = { IdHeaderPenjualan: $("#IdHeaderPenjualan").val(), IdBarang: idBr };
+
+            alert($("#IdHeaderPenjualan").val());
+            //alert(JSON.stringify(item));
+            $.ajax({
+                url: '@Url.Action("ReturBarang", "ReceivedOrder")',
+                type: 'post',
+                data: { IdHeaderPembelian: $("#IdHeaderPembelian").val(), IdBarang: idBr },
+                success: function (result) {
+                    $(".modal-title").html("Edit");
+                    $(".modal-body").html(result);
+                    $("#modal-form").modal("show");
+                }
+            });
+
+        //}
+        }
+
+    @*$(".btn-edit").click(function () {
+        //alert('Id-nya adalah : ' + $(this).attr("data-id"));
+        $.ajax({
+            url: '@Url.Action("Edit", "Karyawan")',
+            type: 'get',
+            data: { id: $(this).attr("data-id") },
+            success: function (result) {
+                $(".modal-title").html("Edit");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });*@
+
+    </script>
+}
+

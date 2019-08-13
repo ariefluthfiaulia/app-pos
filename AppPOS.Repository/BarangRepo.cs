@@ -11,24 +11,30 @@ namespace AppPOS.Repository
     public class BarangRepo
     {
         public static string Message = string.Empty;
+
         public static List<BarangViewModel> GetAll()
+        {
+            return GetAll(0);
+        }
+
+        public static List<BarangViewModel> GetAll(int IdSupplier)
         {
             List<BarangViewModel> result = new List<BarangViewModel>();
             using (var db = new PosContext())
             {
                 result = (from brg in db.Mst_Barangs
-                          join sup in db.Mst_Suppliers
-                          on brg.IdSupplier equals sup.Id
-                          //where dep.DivisionId == (DivisionId > 0 ? DivisionId : dep.DivisionId)
+                          //join sup in db.Mst_Suppliers
+                          //on brg.IdSupplier equals sup.Id
+                          //where brg.IdSupplier == (IdSupplier > 0 ? IdSupplier : brg.IdSupplier)
                           select new BarangViewModel
                           {
                               Id = brg.Id,
                               Code = brg.Code,
-                              IdSupplier = brg.IdSupplier,
-                              NamaSupplier = sup.Nama,
+                              //IdSupplier = brg.IdSupplier,
+                              //NamaSupplier = sup.Nama,
                               Deskripsi=brg.Deskripsi,
-                              Harga=brg.Harga,
-                              Stok=brg.Stok,
+                              //Harga=brg.Harga,
+                              //Stok=brg.Stok,
                               IsActivated = brg.IsActivated
                           }).ToList();
             }
@@ -49,10 +55,10 @@ namespace AppPOS.Repository
                         Barang barang = new Barang();
                         barang.Id = model.Id;
                         barang.Code = model.Code;
-                        barang.IdSupplier = model.IdSupplier;
+                        //barang.IdSupplier = model.IdSupplier;
                         barang.Deskripsi = model.Deskripsi;
-                        barang.Harga = model.Harga;
-                        barang.Stok = model.Stok;
+                        //barang.Harga = model.Harga;
+                        //barang.Stok = model.Stok;
                         barang.IsActivated = model.IsActivated;
                         barang.CreatedBy = "Arief";
                         barang.CreatedDate = DateTime.Now;
@@ -66,10 +72,10 @@ namespace AppPOS.Repository
                         if (barang != null)
                         {
                             barang.Code = model.Code;
-                            barang.IdSupplier = model.IdSupplier;
+                            //barang.IdSupplier = model.IdSupplier;
                             barang.Deskripsi = model.Deskripsi;
-                            barang.Harga = model.Harga;
-                            barang.Stok = model.Stok;
+                            //barang.Harga = model.Harga;
+                            //barang.Stok = model.Stok;
                             barang.IsActivated = model.IsActivated;
                             barang.ModifiedBy = "Arief";
                             barang.ModifiedDate = DateTime.Now;
@@ -94,17 +100,17 @@ namespace AppPOS.Repository
             using (var db = new PosContext())
             {
                 result = (from brg in db.Mst_Barangs
-                          join sup in db.Mst_Suppliers
-                          on brg.IdSupplier equals sup.Id
+                          //join sup in db.Mst_Suppliers
+                          //on brg.IdSupplier equals sup.Id
                           select new BarangViewModel
                           {
                               Id = brg.Id,
                               Code = brg.Code,
-                              IdSupplier=brg.IdSupplier,
-                              NamaSupplier = sup.Nama,
+                              //IdSupplier=brg.IdSupplier,
+                              //NamaSupplier = sup.Nama,
                               Deskripsi = brg.Deskripsi,
-                              Harga=brg.Harga,
-                              Stok=brg.Stok,
+                              //Harga=brg.Harga,
+                              //Stok=brg.Stok,
                               IsActivated = brg.IsActivated
                           }).FirstOrDefault();
             }

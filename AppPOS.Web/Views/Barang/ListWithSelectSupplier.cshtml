@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AppPOS.ViewModel.BarangViewModel>
+
+<p>
+    <table class="table">
+        <tr>
+            <th>Pilih</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Deskripsi)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Harga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stok)
+            </th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-primary btn-Select" data-id="@item.Id" onclick="TambahBarangKeTabelDetail(@item.Id)" title="Select" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deskripsi)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Harga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stok)
+                </td>*@
+            </tr>
+        }
+
+    </table>

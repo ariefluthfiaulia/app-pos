@@ -16,10 +16,10 @@ namespace AppPOS.DataModel
 
         public int IdHeaderPembelian { get; set; }
 
-        public int IdBarang { get; set; }
+        public int IdDetailBarang { get; set; }
 
         [Column(TypeName = "decimal")]
-        public decimal Harga { get; set; }
+        public decimal HargaPembelian { get; set; }
 
         [Column(TypeName = "decimal")]
         public decimal JumlahBarang { get; set; }
@@ -27,16 +27,16 @@ namespace AppPOS.DataModel
         [Column(TypeName = "decimal")]
         public decimal Total { get; set; }
 
-        [Column(TypeName = "datetime")]
-        public DateTime? TanggalPengembalian { get; set; }
-
-        [Column(TypeName = "varchar"), MaxLength(200)]
-        public string AlasanPengembalian { get; set; }
-
-        //[ForeignKey("IdHeaderPembelian")]
-        //public virtual HeaderPembelian HeaderPembelian { get; set; }
+        [ForeignKey("IdHeaderPembelian")]
+        public virtual HeaderPembelian HeaderPembelian { get; set; }
 
         //[ForeignKey("IdBarang")]
         //public virtual Barang Barang { get; set; }
+
+        //[ForeignKey("IdSupplier")]
+        //public virtual Supplier Supplier { get; set; }
+
+        [ForeignKey("IdDetailBarang")]
+        public virtual DetailBarang DetailBarang { get; set; }
     }
 }

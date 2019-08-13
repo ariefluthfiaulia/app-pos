@@ -16,20 +16,20 @@ namespace AppPOS.ViewModel
         [MaxLength(10)]
         public string Code { get; set; }
 
-        [Display(Name = "Supplier")]
-        public int IdSupplier { get; set; }
+        //[Display(Name = "Supplier")]
+        //public int IdSupplier { get; set; }
 
-        [Display(Name = "Supplier")]
-        public string NamaSupplier { get; set; }
+        //[Display(Name = "Supplier")]
+        //public string NamaSupplier { get; set; }
 
-        [DisplayName("Deskripsi")]
+        [DisplayName("Deskripsi"), MaxLength(50)]
         public string Deskripsi { get; set; }
 
-        [Display(Name="Harga"), Column(TypeName = "money")]
-        public decimal Harga { get; set; }
+        //[Display(Name="Harga"), Column(TypeName = "money")]
+        //public decimal Harga { get; set; }
 
-        [Display(Name = "Stok")]
-        public int Stok { get; set; }
+        //[Display(Name = "Stok")]
+        //public int Stok { get; set; }
 
         [Display(Name = "Record ini aktif?")]
         public bool IsActivated { get; set; }

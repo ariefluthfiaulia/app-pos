@@ -14,16 +14,23 @@
             <li class="header"><strong>MAIN NAVIGATION</strong></li>
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-paperclip"></i>
+                    <i class="fa fa-database"></i>
                     <span>Master</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="@Url.Action("Index", "Toko")">
-                            <i class="fa fa-book"></i><span>Toko</span>
+                        <a href="@Url.Action("Index", "Barang")">
+                            <i class="fa fa-book"></i><span>Barang</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "DetailBarang")">
+                            <i class="fa fa-book"></i><span>Detail Barang</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="@Url.Action("Index", "Karyawan")">
                             <i class="fa fa-book"></i><span>Karyawan</span>
@@ -37,45 +44,69 @@
                     </li>
 
                     <li>
-                        <a href="@Url.Action("Index", "Barang")">
-                            <i class="fa fa-book"></i><span>Barang</span>
-                        </a>
-                    </li>
-
-                    <li>
                         <a href="@Url.Action("Index", "Supplier")">
                             <i class="fa fa-book"></i><span>Supplier</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Toko")">
+                            <i class="fa fa-book"></i><span>Toko</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li>
-                <a href="@Url.Action("Index", "Payroll")">
-                    <i class="fa fa-compass"></i><span>Payroll</span>
-                </a>
-            </li>
+            @*<li>
+            <a href="@Url.Action("Index", "Payroll")">
+                <i class="fa fa-compass"></i><span>Payroll</span>
+            </a>
+        </li>*@
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-database"></i>
-                    <span>Menu 3</span>
+                    <i class="fa fa-compass"></i>
+                    <span>Transaksi Penjualan</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="#">
-                            <i class="fa fa-book"></i><span>Menu 3.1</span>
+                        <a href="@Url.Action("Index", "Penjualan")">
+                            <i class="fa fa-book"></i><span>Penjualan</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-book"></i><span>Menu 3.2</span>
+                        <a href="@Url.Action("Index", "ReturPenjualan")">
+                            <i class="fa fa-book"></i><span>Retur Penjualan</span>
+                        </a>
+                    </li>
+                    @*<li>
+                    <a href="@Url.Action("Index", "Employee")">
+                        <i class="fa fa-book"></i><span>Employee</span>
+                    </a>
+                </li>*@
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-compass"></i>
+                    <span>Transaksi Pembelian</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Pembelian")">
+                            <i class="fa fa-book"></i><span>Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "Employee")">
-                            <i class="fa fa-book"></i><span>Employee</span>
+                        <a href="@Url.Action("Index", "ReceivedOrder")">
+                            <i class="fa fa-book"></i><span>Received Order</span>
                         </a>
                     </li>
+                    @*<li>
+                    <a href="@Url.Action("Index", "Employee")">
+                        <i class="fa fa-book"></i><span>Employee</span>
+                    </a>
+                </li>*@
                 </ul>
             </li>
         </ul>

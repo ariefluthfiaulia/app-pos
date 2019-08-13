@@ -50,6 +50,7 @@
     <Compile Include="Barang.cs" />
     <Compile Include="BaseTable.cs" />
     <Compile Include="DatabaseInitializer.cs" />
+    <Compile Include="DetailBarang.cs" />
     <Compile Include="DetailPembelian.cs" />
     <Compile Include="DetailPenjualan.cs" />
     <Compile Include="HeaderPembelian.cs" />

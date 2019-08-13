@@ -14,12 +14,12 @@ namespace AppPOS.Web.Tests
         {
             using (var db = new PosContext())
             {
-                var karyawans = db.Mst_Karyawans.ToList();
-                if (db.Mst_Karyawans.Any())
+                var barangs = db.Mst_Barangs.ToList();
+                if (db.Mst_Barangs.Any())
                 {
-                    foreach (var karyawan in karyawans)
+                    foreach (var barang in barangs)
                     {
-                        Trace.WriteLine(string.Format("id:{0},No. Induk:{1},Nama Depan:{2}", karyawan.Id, karyawan.NoInduk, karyawan.NamaDepan));
+                        Trace.WriteLine(string.Format("id:{0},Deskripsi:{1}", barang.Id, barang.Deskripsi));
                     }
                 }
                 else

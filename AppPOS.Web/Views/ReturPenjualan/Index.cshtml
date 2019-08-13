@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "Retur Penjualan";
+}
+
+<div class="box">
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="text" id="txt-searching" class="form-control" placeholder="Masukkan No. Referensi" />
+            </div>
+            <div class="col-md-6">
+                <button id="btn-search" class="btn btn-primary">Search</button>
+                @*<button id="btn-employee-search" class="btn btn-primary">List Member</button>*@
+            </div>
+            @*<div class="col-md-3">
+                <input type="text" id="reference-no" class="form-control" />
+            </div>*@
+        </div>
+        <hr />
+        <div class="row">
+            <div id="employee-info" class="col-lg-12"></div>
+        </div>
+        @*<hr />
+        <div class="row">
+            <div class="col-md-3">
+                <input id="txt-barcode" type="text" class="form-control" placeholder="Barcode" />
+            </div>
+            <div class="col-md-3">
+                <button id="btn-search-item-list" class="btn btn-danger">Tambah Barang</button>
+            </div>
+            <div class="col-md-3">
+                <button id="btn-payment" class="btn btn-success">Bayar</button>
+            </div>
+        </div>*@
+        <hr />
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tbl-item-list" class="table table-bordered">
+                    <thead id="tbl-head"></thead>
+                    @Html.Partial("HeaderPenjualan")
+                    <tbody id="tbl-details"></tbody>
+                    <tfoot>
+                        @*<tr>
+                            <td colspan="4">Grand Total</td>
+                            <td>
+                                <input id="grand-total" type="text" class="form-control" value="0" disabled="disabled" readonly="readonly" />
+                            </td>
+                            <td></td>
+                        </tr>*@
+                        @*<tr>
+                            <td colspan="4"></td>
+                            <td><button id="btn-payment" class="btn btn-success">Bayar</button></td>
+                            <td></td>
+                        </tr>*@
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-form" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Modal title</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadFormEmployee("");
+    });
+
+    function LoadFormEmployee(noRef) {
+        $.ajax({
+            url: '@Url.Action("GetByNoReferensi", "Pembeli")',
+            data: { noReferensi: noRef },
+            type: 'get',
+            success: function (result) {
+                $("#employee-info").html(result);
+            }
+        });
+
+        $.ajax({
+            url: '@Url.Action("ListBarang", "ReturPenjualan")',
+            data: { noReferensi: noRef },
+            type: 'get',
+            success: function (result) {
+                $("#tbl-details").html(result);
+            }
+        });
+
+        //TambahBarangKeTabelDetail();
+    }
+
+    $("#btn-search").click(function () {
+        LoadFormEmployee($('#txt-searching').val());
+
+    });
+
+    $("#btn-employee-search").click(function () {
+        $.ajax({
+            url: '@Url.Action("ListWithSelect", "Pembeli")',
+            type: 'get',
+            success: function (result) {
+                $(".modal-title").html("List Member");
+                $(".modal-body").html(result);
+                $("#modal-form").modal("show");
+            }
+        });
+    });
+
+    
+    function ReturBarang(obj) {
+        var tr = $(obj).closest('tr');
+        //var des = $(obj).closest('tr').find('input[name=Deskripsi]').val();
+        //var rem = confirm('Apakah anda ingin menghapus ' + des);
+        //if (rem) {
+            var idBr = $(tr).find("input[name=IdBarang]").val();
+            //var item = { IdHeaderPenjualan: $("#IdHeaderPenjualan").val(), IdBarang: idBr };
+
+            //alert($("#IdHeaderPenjualan").val());
+            //alert(JSON.stringify(item));
+            $.ajax({
+                url: '@Url.Action("ReturBarang", "ReturPenjualan")',
+                type: 'post',
+                data: { IdHeaderPenjualan: $("#IdHeaderPenjualan").val(), IdBarang: idBr },
+                success: function (result) {
+                    $(".modal-title").html("Edit");
+                    $(".modal-body").html(result);
+                    $("#modal-form").modal("show");
+                }
+            });
+        }
+
+</script>
+}

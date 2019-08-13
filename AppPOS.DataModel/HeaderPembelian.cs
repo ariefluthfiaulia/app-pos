@@ -14,18 +14,21 @@ namespace AppPOS.DataModel
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public string IdKaryawan { get; set; }
+        //public string IdKaryawan { get; set; }
 
-        public int IdToko { get; set; }
+        //public int IdToko { get; set; }
+
+        [Column(TypeName = "varchar"), MaxLength(13)]
+        public string Referensi { get; set; }
 
         public DateTime TanggalPembelian { get; set; }
 
-        [ForeignKey("IdKaryawan")]
-        public virtual Karyawan Karyawan { get; set; }
+        //[ForeignKey("IdKaryawan")]
+        //public virtual Karyawan Karyawan { get; set; }
 
         //[ForeignKey("IdToko")]
         //public virtual Toko Toko { get; set; }
 
-        //public virtual ICollection<DetailPembelian> DetailPembelians { get; set; }
+        public virtual ICollection<DetailPembelian> DetailPembelians { get; set; }
     }
 }

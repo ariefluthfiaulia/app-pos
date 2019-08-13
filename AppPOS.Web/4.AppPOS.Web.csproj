@@ -153,9 +153,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BarangController.cs" />
+    <Compile Include="Controllers\DetailBarangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KaryawanController.cs" />
+    <Compile Include="Controllers\PembelianController.cs" />
     <Compile Include="Controllers\PembeliController.cs" />
+    <Compile Include="Controllers\PenjualanController.cs" />
+    <Compile Include="Controllers\ReceivedOrderController.cs" />
+    <Compile Include="Controllers\ReturPenjualanController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\TokoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1036,6 +1041,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.bootstrap-growl.js" />
+    <Content Include="Scripts\jquery.bootstrap-growl.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1110,6 +1117,27 @@
     <Content Include="Views\Supplier\Edit.cshtml" />
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\Supplier\List.cshtml" />
+    <Content Include="Views\Penjualan\Index.cshtml" />
+    <Content Include="Views\Penjualan\HeaderPenjualan.cshtml" />
+    <Content Include="Views\Pembeli\ListWithSelect.cshtml" />
+    <Content Include="Views\Pembeli\GetByNoMember.cshtml" />
+    <Content Include="Views\Barang\ListWithSelect.cshtml" />
+    <Content Include="Views\Pembelian\Index.cshtml" />
+    <Content Include="Views\Pembelian\HeaderPembelian.cshtml" />
+    <Content Include="Views\Pembelian\GetItemById.cshtml" />
+    <Content Include="Views\Barang\ListWithSelectSupplier.cshtml" />
+    <Content Include="Views\DetailBarang\ListWithSelectSupplier.cshtml" />
+    <Content Include="Views\DetailBarang\ListWithSelect.cshtml" />
+    <Content Include="Views\ReturPenjualan\Index.cshtml" />
+    <Content Include="Views\ReturPenjualan\HeaderPenjualan.cshtml" />
+    <Content Include="Views\ReturPenjualan\GetItemById.cshtml" />
+    <Content Include="Views\Pembeli\GetByNoReferensi.cshtml" />
+    <Content Include="Views\ReturPenjualan\ListBarang.cshtml" />
+    <Content Include="Views\Penjualan\GetItemById.cshtml" />
+    <Content Include="Views\ReceivedOrder\Index.cshtml" />
+    <Content Include="Views\ReceivedOrder\HeaderPenjualan.cshtml" />
+    <Content Include="Views\ReceivedOrder\GetItemById.cshtml" />
+    <Content Include="Views\ReceivedOrder\ListBarang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,6 +21,16 @@ namespace AppPOS.Web.Controllers
             return PartialView(BarangRepo.GetAll());
         }
 
+        public ActionResult ListWithSelect()
+        {
+            return PartialView(BarangRepo.GetAll());
+        }
+
+        public ActionResult ListWithSelectSupplier(int IdSupplier)
+        {
+            return PartialView(BarangRepo.GetAll(IdSupplier));
+        }
+
         public ActionResult Create()
         {
             ViewBag.SupplierList = new SelectList(SupplierRepo.GetAll(), "Id", "Nama");

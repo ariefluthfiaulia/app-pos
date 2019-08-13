@@ -42,9 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BarangViewModel.cs" />
+    <Compile Include="DetailBarangViewModel.cs" />
+    <Compile Include="HeaderDetailPembelianViewModel.cs" />
+    <Compile Include="HeaderDetailPenjualanViewModel.cs" />
+    <Compile Include="HeaderDetailReceivedOrderViewModel.cs" />
+    <Compile Include="HeaderDetailReturPenjualanViewModel.cs" />
     <Compile Include="KaryawanViewModel.cs" />
     <Compile Include="PembeliViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnValueViewModel.cs" />
     <Compile Include="SupplierViewModel.cs" />
     <Compile Include="TokoViewModel.cs" />
   </ItemGroup>

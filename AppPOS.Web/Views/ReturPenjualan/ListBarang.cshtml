@@ -1,0 +1,8 @@
+﻿@model IEnumerable<AppPOS.ViewModel.DetailReturPenjualanViewModel>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("GetItemById", item)
+}
+
+

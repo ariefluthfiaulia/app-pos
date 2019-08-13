@@ -443,18 +443,18 @@ namespace AppPOS.Web
                                         "~/Scripts/jquery.bootstrap-growl.js",
                                         "~/Scripts/jquery.bootstrap-growl.min.js"));
 
-            bundles.Add(new StyleBundle("~/Content/Custom").Include(
-                "~/Content/Custom.css"));
+            //bundles.Add(new StyleBundle("~/Content/Custom").Include(
+            //    "~/Content/Custom.css"));
 
-            //plugins for Mapping Tables
-            bundles.Add(new ScriptBundle("~/Scripts/MappingTable/cust-form-controller/js").Include(
-                             "~/Scripts/MappingTable/cust-form-controller.js"));
+            ////plugins for Mapping Tables
+            //bundles.Add(new ScriptBundle("~/Scripts/MappingTable/cust-form-controller/js").Include(
+            //                 "~/Scripts/MappingTable/cust-form-controller.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/Shared/Menu").Include(
-                "~/Scripts/Shared/Active-Menu.js"));
+            //bundles.Add(new ScriptBundle("~/Scripts/Shared/Menu").Include(
+            //    "~/Scripts/Shared/Active-Menu.js"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/Tables/Data/List").Include(
-                "~/Scripts/Tables/Data-list.js"));
+            //bundles.Add(new ScriptBundle("~/Scripts/Tables/Data/List").Include(
+            //    "~/Scripts/Tables/Data-list.js"));
         }
     }
 }

@@ -18,6 +18,8 @@ namespace AppPOS.DataModel
         [Key, Column(TypeName = "varchar"), MaxLength(10), Required]
         public string NoInduk { get; set; }
 
+        //public int IdToko { get; set; }
+
         [Column(TypeName = "varchar"), MaxLength(30), Required]
         public string NamaDepan { get; set; }
 
@@ -42,8 +44,11 @@ namespace AppPOS.DataModel
         [Column(TypeName = "bit")]
         public bool IsActivated { get; set; }
 
-        //public virtual ICollection<HeaderPenjualan> HeaderPenjualans { get; set; }
+        //[ForeignKey("IdToko")]
+        //public virtual Toko Toko { get; set; }
 
-        //public virtual ICollection<HeaderPembelian> HeaderPembelians { get; set; }
+        public virtual ICollection<HeaderPenjualan> HeaderPenjualans { get; set; }
+
+        public virtual ICollection<HeaderPembelian> HeaderPembelians { get; set; }
     }
 }

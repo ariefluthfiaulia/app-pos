@@ -1,0 +1,8 @@
+﻿@model IEnumerable<AppPOS.ViewModel.DetailReceivedOrderViewModel>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("GetItemById", item)
+}
+
+

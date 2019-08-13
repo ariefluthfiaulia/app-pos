@@ -28,5 +28,7 @@ namespace AppPOS.DataModel
         //public virtual ICollection<HeaderPembelian> HeaderPembelians { get; set; }
 
         //public virtual ICollection<HeaderPenjualan> HeaderPenjualans { get; set; }
+
+        //public virtual ICollection<Karyawan> Karyawans { get; set; }
     }
 }

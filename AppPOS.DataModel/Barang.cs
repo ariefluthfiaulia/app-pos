@@ -17,24 +17,29 @@ namespace AppPOS.DataModel
         [Column(TypeName = "varchar"), MaxLength(10)]
         public string Code { get; set; }
 
-        public int IdSupplier { get; set; }
+        //public int IdSupplier { get; set; }
 
         [Column(TypeName = "varchar"), MaxLength(50)]
         public string Deskripsi { get; set; }
 
+        //[Column(TypeName = "decimal")]
+        //public decimal HargaPembelian { get; set; }
+
         [Column(TypeName = "decimal")]
-        public decimal Harga { get; set; }
+        public decimal HargaPenjualan { get; set; }
 
         public int Stok { get; set; }
 
         [Column(TypeName = "bit")]
         public bool IsActivated { get; set; }
 
-        [ForeignKey("IdSupplier")]
-        public virtual Supplier Supplier { get; set; }
+        //[ForeignKey("IdSupplier")]
+        //public virtual Supplier Supplier { get; set; }
 
         //public virtual ICollection<DetailPembelian> DetailPembelians { get; set; }
 
-        //public virtual ICollection<DetailPenjualan> DetailPenjualans { get; set; }
+        public virtual ICollection<DetailPenjualan> DetailPenjualans { get; set; }
+
+        public virtual ICollection<DetailBarang> DetailBarangs { get; set; }
     }
 }
